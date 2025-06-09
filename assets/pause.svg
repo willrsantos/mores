@@ -1,6 +1,6 @@
 <!-- filepath: c:\dev\mores\assets\pause.svg -->
 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
   <circle cx="24" cy="24" r="24" fill="#fff2cc"/>
-  <rect x="16" y="14" width="5" height="20" rx="2" fill="#99795d"/>
-  <rect x="27" y="14" width="5" height="20" rx="2" fill="#99795d"/>
+  <rect x="16" y="14" width="5" height="20" rx="2" fill="#000000"/>
+  <rect x="27" y="14" width="5" height="20" rx="2" fill="#000000"/>
 </svg>

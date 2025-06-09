@@ -156,7 +156,7 @@ h2 {
   bottom: 32px;
   right: 32px;
   z-index: 1000;
-  background: linear-gradient(135deg, #e89c5a 0%, #b97a56 100%);
+  background: linear-gradient(135deg, #686867 0%, #494847 100%);
   border: none;
   border-radius: 50%;
   width: 64px;
@@ -170,7 +170,7 @@ h2 {
 }
 
 .floating-music-btn:hover {
-  background: linear-gradient(135deg, #b97a56 0%, #e89c5a 100%);
+  background: linear-gradient(135deg, #494847 0%, #686867 100%);
   transform: scale(1.08);
 }
 

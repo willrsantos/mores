@@ -182,8 +182,8 @@ Will 💜, seu benzinho.`;
     sunflower.src = "assets/sunflower.png";
     sunflower.className = "sunflower";
     sunflower.style.left = Math.random() * 95 + "vw";
-    sunflower.style.opacity = "0.7"; // 60% transparente
-    const duration = 4 + Math.random() * 5;
+    sunflower.style.opacity = "0.6"; // 60% transparente
+    const duration = 7 + Math.random() * 4; // Cai devagar: 7 a 11 segundos
     sunflower.style.animationDuration = duration + "s";
     document.body.appendChild(sunflower);
 
@@ -192,5 +192,5 @@ Will 💜, seu benzinho.`;
     });
   }
 
-  setInterval(createSunflower, 900);
+  setInterval(createSunflower, 3500); // Menor quantidade: 1 flor a cada 3,5s
 });

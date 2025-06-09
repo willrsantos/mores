@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap");
 
 * {
   margin: 0;
@@ -52,7 +52,7 @@ h1 {
   background: #fffbe9;
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(232, 156, 90, 0.1), 0 2px 8px #e89c5a22;
-  padding: 16px 16px 40px 16px;
+  padding: 16px 16px 60px 16px;
   margin: 0 auto 40px;
   position: relative;
   width: fit-content;
@@ -74,7 +74,7 @@ h1 {
 
 .polaroid-caption {
   position: absolute;
-  bottom: 12px;
+  bottom: 22px;
   left: 0;
   width: 100%;
   text-align: center;
@@ -90,31 +90,41 @@ h1 {
 
 .timer-container {
   margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.477); /* 70% transparente */
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column; /* Um elemento em cima do outro */
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 h2 {
   font-family: "Poppins", Arial, sans-serif;
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #b97a56;
+  color: #3d3d3d;
   font-weight: 400;
+  text-shadow: 2px 5px 10px rgb(123, 123, 123);
 }
 
 #timer {
   font-size: 1.3rem;
-  color: #b97a56;
+  color: #3d3d3d;
   font-weight: 400;
+  text-shadow: 2px 5px 10px rgb(123, 123, 123);
 }
 
 .separator {
   height: 1px;
-  background: linear-gradient(to right, transparent, #e89c5a, transparent);
+  background: linear-gradient(to right, transparent, #3d3d3d, transparent);
   margin: 40px auto;
   width: 60%;
 }
 
 .message-box {
-  background: rgba(255, 255, 255, 0.2); /* 70% transparente */
+  background: rgba(255, 255, 255, 0.477); /* 70% transparente */
   padding: 0px;
   border-radius: 10px;
   min-height: 120px;
@@ -126,11 +136,12 @@ h2 {
 }
 
 #typed-message {
-  font-family: "Poiret One", sans-serif;
-  font-weight: 500;
-  font-style: bold;
-  font-size: 1.9rem;
-  text-shadow: 0px 0px 2px rgb(0, 0, 0);
+  font-family: "Edu NSW ACT Cursive", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  text-shadow: 2px 5px 10px rgb(123, 123, 123);
   color: #1d1d1d;
   background: rgba(255, 255, 255, 0.1); /* 70% transparente */
   border-radius: 12px;
@@ -138,14 +149,6 @@ h2 {
   line-height: 0.1;
   box-shadow: none; /* remove sombra */
   letter-spacing: 0.01em;
-}
-
-.cursor {
-  color: #e89c5a;
-  font-weight: bold;
-  animation: blink 1s step-end infinite;
-  font-size: 1.5rem;
-  margin-left: 3px;
 }
 
 .floating-music-btn {

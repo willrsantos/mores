@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz Dia dos Namorados</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Poppins:wght@400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="background-slideshow"></div>
+    <div class="container">
+      <!-- <h1>Feliz Dia dos Namorados</h1> -->
+
+      <div class="polaroid-frame">
+        <img id="slideshow" src="assets/foto1.png" alt="Nossas fotos" />
+        <div class="polaroid-caption">Nós dois 💜</div>
+      </div>
+
+      <div class="timer-container">
+        <h2>Me tornei completo há:</h2>
+        <div id="timer">Carregando...</div>
+      </div>
+
+      <div class="separator"></div>
+
+      <button
+        id="open-message-btn"
+        class="open-message-btn"
+        aria-label="Abrir mensagem"
+      >
+        <img src="assets/botao_abrir_mensagem.png" alt="Abrir mensagem" />
+      </button>
+      <div class="message-box" id="message-box" style="display: none">
+        <div id="typed-message"></div>
+      </div>
+
+      <div class="separator"></div>
+    </div>
+
+    <button
+      id="music-toggle"
+      class="floating-music-btn"
+      aria-label="Tocar/Pausar música"
+    >
+      <img id="music-icon" src="assets/play.svg" alt="Play" />
+    </button>
+
+    <audio id="bgMusic" loop>
+      <source src="assets/musica.mp3" type="audio/mpeg" />
+      Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>

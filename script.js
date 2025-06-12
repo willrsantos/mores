@@ -199,7 +199,7 @@ Will 💜, seu benzinho.`;
   const polaroidFrame = document.querySelector('.polaroid-frame');
   const openMessageBtn = document.getElementById("open-message-btn");
   const messageBox = document.getElementById("message-box");
-  const timerContainer = document.querySelector('.timer-container');
+  const timerContainer = document.querySelector('.polaroid-frame');
   let polaroidMini = null;
   let canShowMini = false;
 
@@ -226,7 +226,7 @@ Will 💜, seu benzinho.`;
                 document.body.appendChild(polaroidMini);
                 syncMiniPolaroid();
               }
-            }, 1000);
+            }, 500);
           }
         } else {
           // Remove a miniatura se o timer voltar a aparecer e limpa timeout

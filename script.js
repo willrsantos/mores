@@ -1,3 +1,9 @@
+window.scrollTo(0, 0);
+
+document.addEventListener("DOMContentLoaded", function () {
+  window.scrollTo(0, 0);
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   // --- Slideshow de fundo ---
   const bgPhotos = [
@@ -184,7 +190,37 @@ Will 💜, seu benzinho.`;
   const polaroidFrame = document.querySelector('.polaroid-frame');
   const openMessageBtn = document.getElementById("open-message-btn");
   const messageBox = document.getElementById("message-box");
+  const timerContainer = document.querySelector('.timer-container');
   let polaroidMini = null;
+  let canShowMini = false;
+
+  // Observer para saber quando o timer sumiu da tela
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        canShowMini = !entry.isIntersecting;
+
+        // Só mostra a miniatura se a mensagem estiver aberta e o timer sumiu
+        if (canShowMini && !polaroidMini && messageBox.style.display === "flex") {
+          polaroidMini = polaroidFrame.cloneNode(true);
+          polaroidMini.classList.add('mini');
+          polaroidMini.style.position = 'fixed';
+          polaroidMini.style.left = '32px';
+          polaroidMini.style.bottom = '32px';
+          polaroidMini.style.zIndex = '1002';
+          document.body.appendChild(polaroidMini);
+          syncMiniPolaroid();
+        }
+        // Remove a miniatura se o timer voltar a aparecer
+        if (!canShowMini && polaroidMini) {
+          polaroidMini.remove();
+          polaroidMini = null;
+        }
+      });
+    },
+    { threshold: 0 }
+  );
+  if (timerContainer) observer.observe(timerContainer);
 
   // Função para sincronizar a imagem da miniatura com a principal
   function syncMiniPolaroid() {
@@ -192,7 +228,6 @@ Will 💜, seu benzinho.`;
       const miniImg = polaroidMini.querySelector('img');
       const mainImg = polaroidFrame.querySelector('img');
       if (miniImg && mainImg) {
-        // Aplica transição de opacidade
         miniImg.style.transition = "opacity 0.5s";
         miniImg.style.opacity = 0;
         setTimeout(() => {
@@ -213,8 +248,8 @@ Will 💜, seu benzinho.`;
       messageBox.style.display = "flex";
       setTimeout(showFullMessage, 400);
 
-      // Cria mini polaroid no canto, sem remover o principal
-      if (!polaroidMini) {
+      // Só cria a mini polaroid se o timer não estiver visível
+      if (!polaroidMini && canShowMini) {
         polaroidMini = polaroidFrame.cloneNode(true);
         polaroidMini.classList.add('mini');
         polaroidMini.style.position = 'fixed';
@@ -222,8 +257,8 @@ Will 💜, seu benzinho.`;
         polaroidMini.style.bottom = '32px';
         polaroidMini.style.zIndex = '1002';
         document.body.appendChild(polaroidMini);
+        syncMiniPolaroid();
       }
-      syncMiniPolaroid(); // <-- Garante que a miniatura começa sincronizada
     }, 500);
   });
 
@@ -247,4 +282,10 @@ Will 💜, seu benzinho.`;
   }
 
   setInterval(createFallingImage, 3500); // 1 imagem a cada 3,5s
+});
+
+window.scrollTo(0, 0);
+
+document.addEventListener("DOMContentLoaded", function () {
+  window.scrollTo(0, 0);
 });

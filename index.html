@@ -9,6 +9,31 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Poppins:wght@400&display=swap"
       rel="stylesheet"
     />
+    <style>
+      /* Adicione ao seu arquivo CSS principal */
+      #sound-overlay {
+        position: fixed;
+        z-index: 2000;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+        transition: opacity 0.7s;
+      }
+      #sound-overlay span {
+        color: #fff;
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-shadow: 0 2px 12px #000;
+        letter-spacing: 0.05em;
+      }
+      #sound-overlay.hide {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
     <div id="background-slideshow"></div>
@@ -53,6 +78,10 @@
       <source src="assets/musica.mp3" type="audio/mpeg" />
       Seu navegador não suporta o elemento de áudio.
     </audio>
+
+    <div id="sound-overlay">
+      <span>Ligue o som benzinho</span>
+    </div>
 
     <script src="script.js"></script>
   </body>

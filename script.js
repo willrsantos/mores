@@ -5,6 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Overlay "Ligue o som"
+  const overlay = document.getElementById('sound-overlay');
+  if (overlay) {
+    setTimeout(() => {
+      overlay.classList.add('hide');
+      setTimeout(() => overlay.remove(), 800);
+    }, 3000);
+  }
+
   // --- Slideshow de fundo ---
   const bgPhotos = [
     "assets/bg1.jpg",
@@ -194,27 +203,41 @@ Will 💜, seu benzinho.`;
   let polaroidMini = null;
   let canShowMini = false;
 
-  // Observer para saber quando o timer sumiu da tela
+  // Observer para saber quando o timer sumiu da tela, com delay de 5s
+  let miniPolaroidTimeout = null;
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
         canShowMini = !entry.isIntersecting;
 
-        // Só mostra a miniatura se a mensagem estiver aberta e o timer sumiu
-        if (canShowMini && !polaroidMini && messageBox.style.display === "flex") {
-          polaroidMini = polaroidFrame.cloneNode(true);
-          polaroidMini.classList.add('mini');
-          polaroidMini.style.position = 'fixed';
-          polaroidMini.style.left = '32px';
-          polaroidMini.style.bottom = '32px';
-          polaroidMini.style.zIndex = '1002';
-          document.body.appendChild(polaroidMini);
-          syncMiniPolaroid();
-        }
-        // Remove a miniatura se o timer voltar a aparecer
-        if (!canShowMini && polaroidMini) {
-          polaroidMini.remove();
-          polaroidMini = null;
+        if (canShowMini) {
+          // Só mostra a miniatura se a mensagem estiver aberta e o timer sumiu, após 5s
+          if (!polaroidMini && messageBox.style.display === "flex") {
+            if (miniPolaroidTimeout) clearTimeout(miniPolaroidTimeout);
+            miniPolaroidTimeout = setTimeout(() => {
+              // Verifica novamente se ainda pode mostrar
+              if (canShowMini && !polaroidMini && messageBox.style.display === "flex") {
+                polaroidMini = polaroidFrame.cloneNode(true);
+                polaroidMini.classList.add('mini');
+                polaroidMini.style.position = 'fixed';
+                polaroidMini.style.left = '32px';
+                polaroidMini.style.bottom = '32px';
+                polaroidMini.style.zIndex = '1002';
+                document.body.appendChild(polaroidMini);
+                syncMiniPolaroid();
+              }
+            }, 3500);
+          }
+        } else {
+          // Remove a miniatura se o timer voltar a aparecer e limpa timeout
+          if (miniPolaroidTimeout) {
+            clearTimeout(miniPolaroidTimeout);
+            miniPolaroidTimeout = null;
+          }
+          if (polaroidMini) {
+            polaroidMini.remove();
+            polaroidMini = null;
+          }
         }
       });
     },
@@ -260,6 +283,9 @@ Will 💜, seu benzinho.`;
         syncMiniPolaroid();
       }
     }, 500);
+
+    // Mostra o botão de música ao abrir a mensagem
+    document.getElementById("music-toggle").style.display = "block";
   });
 
   // --- Efeito de girassóis e corações caindo ---

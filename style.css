@@ -57,6 +57,11 @@ h1 {
   position: relative;
   width: fit-content;
   max-width: 98vw;
+  transition: 
+    all 0.7s cubic-bezier(.68,-0.55,.27,1.55),
+    background 0.4s,
+    box-shadow 0.4s,
+    border-radius 0.4s;
 }
 
 /* Miniatura sem moldura polaroid */
@@ -73,6 +78,8 @@ h1 {
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0 !important;
+  border: none !important;
+  opacity: 1 !important;
   transition: all 0.4s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
@@ -86,7 +93,10 @@ h1 {
   border-radius: 6px;
   box-shadow: 0 2px 8px #e89c5a33;
   background: #fbeee6;
-  transition: opacity 1s ease-in-out;
+  transition: 
+    /* max-width 0.7s cubic-bezier(.68,-0.55,.27,1.55),
+    max-height 0.7s cubic-bezier(.68,-0.55,.27,1.55), */
+    opacity 1s ease-in-out;
 }
 
 .polaroid-frame.mini img {

@@ -68,8 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         slideshow.src = photos[currentPhotoIndex];
         slideshow.style.opacity = 1;
+        syncMiniPolaroid(); // <-- Adicione esta linha
       }, 500);
-    }, 2500);
+    }, 6000);
   }
 
   loadPhotos();
@@ -180,24 +181,27 @@ Will 💜, seu benzinho.`;
     }, 100);
   }
 
+  const polaroidFrame = document.querySelector('.polaroid-frame');
   const openMessageBtn = document.getElementById("open-message-btn");
   const messageBox = document.getElementById("message-box");
+  let polaroidMini = null;
 
-  // --- Polaroid em miniatura ao rolar (apenas após abrir a mensagem) ---
-  const polaroidFrame = document.querySelector('.polaroid-frame');
-  const polaroidOriginalTop = polaroidFrame.getBoundingClientRect().top + window.scrollY;
-  let polaroidScrollActive = false;
-
-  function handlePolaroidScroll() {
-    if (!polaroidScrollActive) return;
-    if (window.scrollY > polaroidOriginalTop + 80) {
-      polaroidFrame.classList.add('mini');
-    } else {
-      polaroidFrame.classList.remove('mini');
+  // Função para sincronizar a imagem da miniatura com a principal
+  function syncMiniPolaroid() {
+    if (polaroidMini) {
+      const miniImg = polaroidMini.querySelector('img');
+      const mainImg = polaroidFrame.querySelector('img');
+      if (miniImg && mainImg) {
+        // Aplica transição de opacidade
+        miniImg.style.transition = "opacity 0.5s";
+        miniImg.style.opacity = 0;
+        setTimeout(() => {
+          miniImg.src = mainImg.src;
+          miniImg.style.opacity = 1;
+        }, 250);
+      }
     }
   }
-
-  window.addEventListener('scroll', handlePolaroidScroll);
 
   openMessageBtn.addEventListener("click", function () {
     openMessageBtn.style.transition =
@@ -208,9 +212,18 @@ Will 💜, seu benzinho.`;
       openMessageBtn.style.display = "none";
       messageBox.style.display = "flex";
       setTimeout(showFullMessage, 400);
-      // Ativa o efeito da polaroid miniatura só após abrir a mensagem
-      polaroidScrollActive = true;
-      handlePolaroidScroll(); // já verifica o estado atual ao ativar
+
+      // Cria mini polaroid no canto, sem remover o principal
+      if (!polaroidMini) {
+        polaroidMini = polaroidFrame.cloneNode(true);
+        polaroidMini.classList.add('mini');
+        polaroidMini.style.position = 'fixed';
+        polaroidMini.style.left = '32px';
+        polaroidMini.style.bottom = '32px';
+        polaroidMini.style.zIndex = '1002';
+        document.body.appendChild(polaroidMini);
+      }
+      syncMiniPolaroid(); // <-- Garante que a miniatura começa sincronizada
     }, 500);
   });
 
@@ -222,7 +235,7 @@ Will 💜, seu benzinho.`;
     img.className = isSunflower ? "sunflower" : "coracao";
     img.style.left = Math.random() * 95 + "vw";
     img.style.opacity = "0.6";
-    const duration = 7 + Math.random() * 4;
+    const duration = 23 + Math.random() * 6; // Agora entre 12 e 18 segundos
     img.style.animationDuration = duration + "s";
     img.style.width = "48px";
     img.style.height = "48px";
@@ -233,5 +246,5 @@ Will 💜, seu benzinho.`;
     });
   }
 
-  setInterval(createFallingImage, 2000); // 1 imagem a cada 3,5s
+  setInterval(createFallingImage, 3500); // 1 imagem a cada 3,5s
 });

@@ -188,11 +188,11 @@ h2 {
   bottom: 32px;
   right: 32px;
   z-index: 1000;
-  background: linear-gradient(135deg, #686867 0%, #494847 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
   border: none;
   border-radius: 50%;
-  width: 64px;
-  height: 64px;
+  width: 35px;
+  height: 35px;
   box-shadow: 0 4px 24px #e89c5a44;
   display: flex;
   align-items: center;
@@ -402,6 +402,30 @@ h2 {
 /* Adicione ao seu CSS */
 #music-toggle {
   display: none;
+}
+
+/* Overlay para som */
+#sound-overlay {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  transition: opacity 0.7s;
+}
+#sound-overlay span {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 0 2px 12px #000;
+  letter-spacing: 0.05em;
+}
+#sound-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Responsivo */

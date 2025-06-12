@@ -164,6 +164,22 @@ Will 💜, seu benzinho.`;
   const openMessageBtn = document.getElementById("open-message-btn");
   const messageBox = document.getElementById("message-box");
 
+  // --- Polaroid em miniatura ao rolar (apenas após abrir a mensagem) ---
+  const polaroidFrame = document.querySelector('.polaroid-frame');
+  const polaroidOriginalTop = polaroidFrame.getBoundingClientRect().top + window.scrollY;
+  let polaroidScrollActive = false;
+
+  function handlePolaroidScroll() {
+    if (!polaroidScrollActive) return;
+    if (window.scrollY > polaroidOriginalTop + 80) {
+      polaroidFrame.classList.add('mini');
+    } else {
+      polaroidFrame.classList.remove('mini');
+    }
+  }
+
+  window.addEventListener('scroll', handlePolaroidScroll);
+
   openMessageBtn.addEventListener("click", function () {
     openMessageBtn.style.transition =
       "transform 0.5s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.5s";
@@ -173,6 +189,9 @@ Will 💜, seu benzinho.`;
       openMessageBtn.style.display = "none";
       messageBox.style.display = "flex";
       setTimeout(showFullMessage, 400);
+      // Ativa o efeito da polaroid miniatura só após abrir a mensagem
+      polaroidScrollActive = true;
+      handlePolaroidScroll(); // já verifica o estado atual ao ativar
     }, 500);
   });
 

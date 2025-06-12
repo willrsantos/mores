@@ -59,6 +59,20 @@ h1 {
   max-width: 98vw;
 }
 
+.polaroid-frame.mini {
+  position: fixed;
+  left: 32px;
+  bottom: 32px;
+  width: 120px;
+  max-width: 25vw;
+  max-height: 160px;
+  z-index: 1002;
+  padding: 8px 8px 24px 8px;
+  margin: 0;
+  box-shadow: 0 4px 24px #e89c5a44;
+  transition: all 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
 .polaroid-frame img {
   display: block;
   max-width: 80vw;
@@ -70,6 +84,11 @@ h1 {
   box-shadow: 0 2px 8px #e89c5a33;
   background: #fbeee6;
   transition: opacity 1s ease-in-out;
+}
+
+.polaroid-frame.mini img {
+  max-width: 100px;
+  max-height: 80px;
 }
 
 .polaroid-caption {

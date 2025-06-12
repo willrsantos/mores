@@ -9,8 +9,6 @@
 body {
   font-family: "Inter", Arial, sans-serif;
   font-weight: 300;
-  /* Remova ou comente a linha abaixo */
-  /* background: linear-gradient(135deg, #fbeee6 0%, #f7d9b9 100%); */
   background: none;
   color: #6b4c2b;
   display: flex;
@@ -57,11 +55,7 @@ h1 {
   position: relative;
   width: fit-content;
   max-width: 98vw;
-  transition: 
-    all 0.7s cubic-bezier(.68,-0.55,.27,1.55),
-    background 0.4s,
-    box-shadow 0.4s,
-    border-radius 0.4s;
+  transition: all 0.7s cubic-bezier(.68,-0.55,.27,1.55), background 0.4s, box-shadow 0.4s, border-radius 0.4s;
 }
 
 /* Miniatura sem moldura polaroid */
@@ -93,15 +87,12 @@ h1 {
   border-radius: 6px;
   box-shadow: 0 2px 8px #e89c5a33;
   background: #fbeee6;
-  transition: 
-    /* max-width 0.7s cubic-bezier(.68,-0.55,.27,1.55),
-    max-height 0.7s cubic-bezier(.68,-0.55,.27,1.55), */
-    opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .polaroid-frame.mini img {
-  max-width: 300px;     /* 100px + 25% = 125px */
-  max-height: 200px;    /* 80px + 25% = 100px */
+  max-width: 300px;
+  max-height: 200px;
 }
 
 .polaroid-caption {
@@ -188,28 +179,32 @@ h2 {
   bottom: 32px;
   right: 32px;
   z-index: 1000;
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+  background: #fff;
   border: none;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  box-shadow: 0 4px 24px #e89c5a44;
+  width: 32px;
+  height: 32px;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
+  padding: 0;
+}
+
+.floating-music-btn img,
+.floating-music-btn svg {
+  width: 18px;
+  height: 18px;
+  filter: none;
+  background: none;
+  color: #111;
 }
 
 .floating-music-btn:hover {
-  background: linear-gradient(135deg, #494847 0%, #686867 100%);
+  background: #fff;
   transform: scale(1.08);
-}
-
-.floating-music-btn img {
-  width: 32px;
-  height: 32px;
-  filter: drop-shadow(0 0 2px #fff8);
 }
 
 .open-message-btn {
@@ -300,19 +295,7 @@ h2 {
   gap: 20px;
 }
 
-.sunflower {
-  position: fixed;
-  top: -80px;
-  left: 0;
-  width: 48px;
-  height: 48px;
-  pointer-events: none;
-  z-index: 999;
-  animation: sunflower-fall linear forwards;
-  transition: opacity 0.5s;
-  opacity: 0.6;
-}
-
+.sunflower,
 .coracao {
   position: fixed;
   top: -80px;
@@ -321,59 +304,39 @@ h2 {
   height: 48px;
   pointer-events: none;
   z-index: 999;
-  animation: coracao-fall linear forwards;
   transition: opacity 0.5s;
   opacity: 0.6;
 }
 
+.sunflower {
+  animation: sunflower-fall linear forwards;
+}
+
+.coracao {
+  animation: coracao-fall linear forwards;
+}
+
 @keyframes sunflower-fall {
-  0% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 0.6;
-  }
-  80% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg) scale(1.1);
-    opacity: 0.2;
-  }
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(110vh) rotate(360deg) scale(1.1); opacity: 0.2; }
 }
 
 @keyframes coracao-fall {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.6;
-  }
-  80% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(110vh) scale(1.1);
-    opacity: 0.2;
-  }
+  0% { transform: translateY(0) scale(1); opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(110vh) scale(1.1); opacity: 0.2; }
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 @keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Background Slideshow */
@@ -415,21 +378,26 @@ h2 {
   justify-content: center;
   backdrop-filter: blur(10px);
   transition: opacity 0.7s;
+  text-align: center; /* Centraliza o texto */
 }
+
 #sound-overlay span {
   color: #fff;
   font-size: 2.5rem;
   font-weight: bold;
   text-shadow: 0 2px 12px #000;
   letter-spacing: 0.05em;
-}
-#sound-overlay.hide {
-  opacity: 0;
-  pointer-events: none;
+  display: block;
+  width: 100%;
+  text-align: center; /* Garante centralização */
 }
 
-/* Responsivo */
+/* Responsivo para celular */
 @media (max-width: 600px) {
+  #sound-overlay span {
+    font-size: 1.3rem;
+    padding: 0 10px;
+  }
   .container {
     padding: 20px;
   }

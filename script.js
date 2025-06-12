@@ -226,7 +226,7 @@ Will 💜, seu benzinho.`;
                 document.body.appendChild(polaroidMini);
                 syncMiniPolaroid();
               }
-            }, 1500);
+            }, 1000);
           }
         } else {
           // Remove a miniatura se o timer voltar a aparecer e limpa timeout
@@ -307,7 +307,7 @@ Will 💜, seu benzinho.`;
     });
   }
 
-  setInterval(createFallingImage, 3500); // 1 imagem a cada 3,5s
+  setInterval(createFallingImage, 5500); // 1 imagem a cada 3,5s
 });
 
 window.scrollTo(0, 0);

@@ -31,29 +31,48 @@ document.addEventListener("DOMContentLoaded", function () {
   createBgSlides();
   startBgSlideshow();
 
-  // --- Slideshow de fotos principais ---
-  const photos = [
-    "assets/foto1.jpg",
-    "assets/foto2.jpg",
-    "assets/foto3.jpg",
-    "assets/foto4.jpg",
-    "assets/foto5.jpg",
-    "assets/foto6.jpg",
-    // Adicione mais caminhos de imagens conforme desejar
-  ];
-  let currentPhotoIndex = 0;
+  // --- Slideshow de fotos principais (dinâmico) ---
   const slideshow = document.getElementById("slideshow");
+  let photos = [];
+  let currentPhotoIndex = 0;
 
-  function changePhoto() {
-    currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
-    slideshow.style.opacity = 0;
-    setTimeout(() => {
-      slideshow.src = photos[currentPhotoIndex];
-      slideshow.style.opacity = 1;
-    }, 500);
+  // Função para verificar se a imagem existe
+  function checkImage(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(url);
+      img.onerror = () => resolve(null);
+      img.src = url;
+    });
   }
 
-  setInterval(changePhoto, 3000);
+  // Tenta carregar fotos de foto1.jpg até foto99.jpg
+  async function loadPhotos() {
+    const checks = [];
+    for (let i = 1; i <= 99; i++) {
+      const url = `assets/foto${i}.jpg`;
+      checks.push(checkImage(url));
+    }
+    const results = await Promise.all(checks);
+    photos = results.filter(Boolean);
+    if (photos.length > 0) {
+      slideshow.src = photos[0];
+      startSlideshow();
+    }
+  }
+
+  function startSlideshow() {
+    setInterval(() => {
+      currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+      slideshow.style.opacity = 0;
+      setTimeout(() => {
+        slideshow.src = photos[currentPhotoIndex];
+        slideshow.style.opacity = 1;
+      }, 500);
+    }, 2500);
+  }
+
+  loadPhotos();
 
   // --- Timer de relacionamento ---
   const startDate = new Date("February 24, 2019 00:00:00");
@@ -195,21 +214,24 @@ Will 💜, seu benzinho.`;
     }, 500);
   });
 
-  // --- Efeito de girassóis caindo ---
-  function createSunflower() {
-    const sunflower = document.createElement("img");
-    sunflower.src = "assets/sunflower.png";
-    sunflower.className = "sunflower";
-    sunflower.style.left = Math.random() * 95 + "vw";
-    sunflower.style.opacity = "0.6"; // 60% transparente
-    const duration = 7 + Math.random() * 4; // Cai devagar: 7 a 11 segundos
-    sunflower.style.animationDuration = duration + "s";
-    document.body.appendChild(sunflower);
+  // --- Efeito de girassóis e corações caindo ---
+  function createFallingImage() {
+    const isSunflower = Math.random() < 0.5; // 50% chance para cada
+    const img = document.createElement("img");
+    img.src = isSunflower ? "assets/sunflower.png" : "assets/coracao.png";
+    img.className = isSunflower ? "sunflower" : "coracao";
+    img.style.left = Math.random() * 95 + "vw";
+    img.style.opacity = "0.6";
+    const duration = 7 + Math.random() * 4;
+    img.style.animationDuration = duration + "s";
+    img.style.width = "48px";
+    img.style.height = "48px";
+    document.body.appendChild(img);
 
-    sunflower.addEventListener("animationend", () => {
-      sunflower.remove();
+    img.addEventListener("animationend", () => {
+      img.remove();
     });
   }
 
-  setInterval(createSunflower, 3500); // Menor quantidade: 1 flor a cada 3,5s
+  setInterval(createFallingImage, 2000); // 1 imagem a cada 3,5s
 });

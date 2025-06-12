@@ -59,17 +59,20 @@ h1 {
   max-width: 98vw;
 }
 
+/* Miniatura sem moldura polaroid */
 .polaroid-frame.mini {
   position: fixed;
   left: 32px;
   bottom: 32px;
-  width: 120px;
-  max-width: 25vw;
-  max-height: 160px;
+  width: 150px;
+  max-width: 31.25vw;
+  max-height: 200px;
   z-index: 1002;
-  padding: 8px 8px 24px 8px;
+  padding: 0 !important;
   margin: 0;
-  box-shadow: 0 4px 24px #e89c5a44;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
   transition: all 0.4s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
@@ -87,8 +90,8 @@ h1 {
 }
 
 .polaroid-frame.mini img {
-  max-width: 100px;
-  max-height: 80px;
+  max-width: 300px;     /* 100px + 25% = 125px */
+  max-height: 200px;    /* 80px + 25% = 100px */
 }
 
 .polaroid-caption {
@@ -297,7 +300,20 @@ h2 {
   z-index: 999;
   animation: sunflower-fall linear forwards;
   transition: opacity 0.5s;
-  opacity: 0.6; /* 60% transparente */
+  opacity: 0.6;
+}
+
+.coracao {
+  position: fixed;
+  top: -80px;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 999;
+  animation: coracao-fall linear forwards;
+  transition: opacity 0.5s;
+  opacity: 0.6;
 }
 
 @keyframes sunflower-fall {
@@ -310,6 +326,20 @@ h2 {
   }
   100% {
     transform: translateY(110vh) rotate(360deg) scale(1.1);
+    opacity: 0.2;
+  }
+}
+
+@keyframes coracao-fall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) scale(1.1);
     opacity: 0.2;
   }
 }
